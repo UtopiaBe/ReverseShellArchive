@@ -19,7 +19,7 @@ def banner():
 ----[ Web: https://csi-blog.com                        GitHub: https://GitHub.com/             ]----
  --------------------------------------------------------------------------------------------------
 | (1) Reverse Shell One Liners:                                                                    |
-| BASH, PHP, PERL, PYTHON, RUBY, NETCAT, TELNET                                           |                             
+| BASH, PHP, PERL, PYTHON, RUBY, NETCAT, TELNET                                                    |                             
 | (2) How to check which Script will work on linux?:                                               |
 | user@linux:~ which [bash/php/perl/python/ruby/netcat/telnet]                                     |
 | Answer needed: /usr/bin/[script]                                                                 |

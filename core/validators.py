@@ -7,7 +7,7 @@ def validateHost(ip, port, parser):
     # Check for correct Port address.
     # up to (65535).
     port_pattern = re.compile(
-        "^[1-9]{1}$|^[0-9]{2,4}$|^[0-9]{3,4}$|^[1-5]{1}[0-9]{1}[0-9]{1}[0-9]{1}[0-9]{1}$|^[1-6]{1}[0-4]{1}[0-9]{1}[0-9]{1}[0-9]{1}$|^[1-6]{1}[0-5]{1}[0-4]{1}[0-9]{1}[0-9]{1}$|^[1-6]{1}[0-5]{1}[0-5]{1}[0-3]{1}[0-5]{1}$")
+        "^0*(?:6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{1,3}|\d)$")
     check_port = port_pattern.match(port)
     # Check for correct IP address.
     # up to (255.255.255.254).
@@ -31,7 +31,7 @@ def validateScript(script):
     if script == "bash" or script == "php" \
             or script == "perl" or script == "python" \
             or script == "ruby" or script == "netcat" \
-            or script == "telnet": # or script == "xterm":
+            or script == "telnet":  # or script == "xterm":
         pass
     elif script is None:
         script = ""
