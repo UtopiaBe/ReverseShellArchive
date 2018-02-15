@@ -1,19 +1,12 @@
-# SambaCry RCE exploit for Samba 4.5.9
+# ReverseShellArchive
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/vulnerables/cve-2017-7494.svg?style=plastic)](https://hub.docker.com/r/vulnerables/cve-2017-7494/)
-![License](https://img.shields.io/badge/License-GPL-blue.svg?style=plastic)
-
-Samba is a free software re-implementation of the SMB/CIFS networking protocol. Samba provides file and print services for various Microsoft Windows clients and can integrate with a Microsoft Windows Server domain, either as a Domain Controller (DC) or as a domain member. As of version 4, it supports Active Directory and Microsoft Windows NT domains.
-
-Samba in **4.5.9** version and before that is vulnerable to a remote code execution vulnerability named **SambaCry**. CVE-2017-7494 allows remote authenticated users to upload a shared library to a writable shared folder, and perform code execution attacks to take control of servers that host vulnerable Samba services.
-
-Samba 3.x after 3.5.0 and 4.x before 4.4.14, 4.5.x before 4.5.10, and 4.6.x before 4.6.4 does not restrict the file path when using Windows named pipes, which allows remote authenticated users to upload a shared library to a writable shared folder, and execute arbitrary code via a crafted named pipe.
-
-
+Reverse Shell Archive is a handy tool to quickly get needed reverse shell script, and to upgrade shells to fully interactive TTYs.
+Supported scripts:
+- BASH, PHP, PERL, PYTHON, RUBY, NETCAT, TELNET
 
 ### Exploit
 
-![sambacry](sambacry.gif)
+(reverseshellsarchive.gif)
 
 To properly run this exploit you will need a patched version of `impacket` python library and the other dependencies in requirements file. To install all of them, please run
 
