@@ -4,7 +4,7 @@ Reverse Shell Archive is a handy tool to quickly get needed reverse shell script
 Supported scripts:
 - BASH, PHP, PERL, PYTHON, RUBY, NETCAT, TELNET
 
-### Exploit
+### Example
 
 (reverseshellsarchive.gif)
 
