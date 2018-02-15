@@ -1,12 +1,13 @@
 # ReverseShellArchive
 
 Reverse Shell Archive is a handy tool to quickly get needed reverse shell script, and to upgrade shells to fully interactive TTYs.
+
 Supported scripts:
 - BASH, PHP, PERL, PYTHON, RUBY, NETCAT, TELNET
 
 ### Example
 
-(reverseshellsarchive.gif)
+![Reverse Shell Archive](https://github.com/UtopiaBe/ReverseShellArchive/lib/reverseshellsarchive.gif
 
 To properly run this exploit you will need a patched version of `impacket` python library and the other dependencies in requirements file. To install all of them, please run
 
