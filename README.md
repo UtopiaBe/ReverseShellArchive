@@ -5,6 +5,27 @@ Reverse Shell Archive is a handy tool to quickly get needed reverse shell script
 Supported scripts:
 - BASH, PHP, PERL, PYTHON, RUBY, NETCAT, TELNET
 
+## Usage:
+
+    Usage: reverseshells.py [options]
+
+    Basic usage: test.py -s [script] -o [os]
+        Will create Script without given ip and port address.
+
+    Advanced usage: test.py -s [script] -o [os] -i [ip] -p [port]
+        Will create Script with given ip and port address.
+
+    Help: test.py -h [help] --help [help]
+
+
+    Options:
+      -h, --help            show this help message and exit
+      -s SCRIPT, --script=SCRIPT
+                            bash, php, perl, python, Ruby, netcat, telnet
+      -o OS, --os=OS        l/linux, w/windows
+      -i HOST, --ip=HOST    Your listening ip address (optional)
+      -p PORT, --port=PORT  Your listening port address (optional)
+
 ### Example
 
 ![Reverse Shell Archive](https://github.com/UtopiaBe/ReverseShellArchive/lib/reverseshellsarchive.gif
