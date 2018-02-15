@@ -1,4 +1,4 @@
-# SambaCry RCE exploit for Samba 4.5.9
+# ReverseShellArchive
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/vulnerables/cve-2017-7494.svg?style=plastic)](https://hub.docker.com/r/vulnerables/cve-2017-7494/)
 ![License](https://img.shields.io/badge/License-GPL-blue.svg?style=plastic)
