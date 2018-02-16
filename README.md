@@ -8,16 +8,16 @@ Supported reverse shell commands:
 ## Usage:
 
     Usage: rsa.py [options]
-
-    Basic usage: rsa.py -s <script> -o <os.
+    
+    Basic usage: rsa.py -s <script> -o <os>
         Will create Script without given ip and port address.
-
-    Advanced usage: rsa.py -s [script] -o [os] -i [ip] -p [port]
+    
+    Advanced usage: rsa.py -s <script> -o <os> -i <ip> -p <port>
         Will create Script with given ip and port address.
-
-    Help: rsa.py -h [help] --help [help]
-
-
+    
+    Help: rsa.py -h, --help
+    
+    
     Options:
       -h, --help            show this help message and exit
       -s SCRIPT, --script=SCRIPT

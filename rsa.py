@@ -38,11 +38,11 @@ def main():
 
     # Usage custom message.
     parser.usage = banner() + "\nUsage: %prog [options]\n" \
-                              "\nBasic usage: %prog -s [script] -o [os]\n" \
+                              "\nBasic usage: %prog -s <script> -o <os>\n" \
                               "\tWill create Script without given ip and port address.\n\n" \
-                              "Advanced usage: %prog -s [script] -o [os] -i [ip] -p [port]\n" \
+                              "Advanced usage: %prog -s <script> -o <os> -i <ip> -p <port>\n" \
                               "\tWill create Script with given ip and port address.\n\n" \
-                              "Help: %prog -h [help] --help [help]\n"
+                              "Help: %prog -h, --help\n"
 
     # Set the script options.
     parser.add_option("-s", "--script", type="str",
