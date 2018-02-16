@@ -66,7 +66,7 @@ def php(host, port, msg):
     finalcode = "\n" + COLORS.bold + code + COLORS.reset + "\n"
 
     print msg
-    sleep(2)
+    sleep(20)
     print finalcode
 
 
@@ -133,7 +133,7 @@ def perl(os, host, port, msg):
           additionalmsg + "\n" + COLORS.bold + secondcode + COLORS.reset + "\n"
 
     print msg
-    sleep(2)
+    sleep(20)
     print finalcode
 
 
