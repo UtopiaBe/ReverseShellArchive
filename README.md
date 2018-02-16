@@ -42,6 +42,7 @@ $ python rsa.py -s <script> -o <os> -i <ip> -p <port>
 
 ### Ideas/Coming soon
 
+* PowerShell shell commands.
 * Local TTY shell upgrades.
 
 ### License
