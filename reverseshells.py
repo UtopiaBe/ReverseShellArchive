@@ -7,7 +7,7 @@ from core.colors import COLORS
 
 
 def banner():
-    print """
+    return """
  _____                                  _____ _          _ _     
 |  __ \                                / ____| |        | | |      /\            | |   (_)          
 | |__) |_____   _____ _ __ ___  ___   | (___ | |__   ___| | |     /  \   _ __ ___| |__  ___   _____ 
@@ -31,18 +31,18 @@ def banner():
 
 def main():
     # Print banner at the start.
-    banner()
+    # banner()
 
     # Begin with parses.
     parser = OptionParser()
 
     # Usage custom message.
-    parser.usage = "%prog [options]\n" \
-                   "\nBasic usage: %prog -s [script] -o [os]\n" \
-                   "\tWill create Script without given ip and port address.\n\n" \
-                   "Advanced usage: %prog -s [script] -o [os] -i [ip] -p [port]\n" \
-                   "\tWill create Script with given ip and port address.\n\n" \
-                   "Help: %prog -h [help] --help [help]\n"
+    parser.usage = banner() + "%prog [options]\n" \
+                              "\nBasic usage: %prog -s [script] -o [os]\n" \
+                              "\tWill create Script without given ip and port address.\n\n" \
+                              "Advanced usage: %prog -s [script] -o [os] -i [ip] -p [port]\n" \
+                              "\tWill create Script with given ip and port address.\n\n" \
+                              "Help: %prog -h [help] --help [help]\n"
 
     # Set the script options.
     parser.add_option("-s", "--script", type="str",
@@ -73,9 +73,9 @@ def main():
     # If good [script] and [os] arguments provided:
     if validateScript(options.script) != 13 and validateScript(options.script) != "" \
             and validateOs(options.os) != 13 and validateOs(options.os) != "" and not options.host and not options.port:
-        msg = COLORS.bg.green + "[+]" + COLORS.reset + " Making '%s' reverse shell for '%s'.\n" \
-              % (options.script, os) + \
-              COLORS.bg.red + "[-]" + COLORS.reset + "Advanced: Please remember to change \"ATTACKING-IP\" and PORT!"
+        msg = COLORS.fg.green + "[+]" + COLORS.reset + " Making '%s' reverse shell for '%s'.\n" \
+                                                       % (options.script, os) + \
+              COLORS.fg.red + "[-]" + COLORS.reset + "Advanced: Please remember to change \"ATTACKING-IP\" and PORT!"
         createShell(options.script, options.os, None, None, msg)
         exit(0)
 
@@ -87,10 +87,10 @@ def main():
         elif options.os == "l" or options.os == "linux":
             os = "Linux"
         # If IP and PORT are acceptable.
-        msg = COLORS.bg.green + "[+]" + COLORS.reset + " Making '%s' reverse shell for '%s'.\n" \
-              % (options.script, os) + \
-              COLORS.bg.green + "[+]" + COLORS.reset + " Advanced: will open reverse shell to: %s:%s." \
-              % (options.host, options.port)
+        msg = COLORS.fg.green + "[+]" + COLORS.reset + " Making '%s' reverse shell for '%s'.\n" \
+                                                       % (options.script, os) + \
+              COLORS.fg.green + "[+]" + COLORS.reset + " Advanced: will open reverse shell to: %s:%s." \
+                                                       % (options.host, options.port)
         createShell(options.script, options.os, options.host, options.port, msg)
         exit(0)
 
