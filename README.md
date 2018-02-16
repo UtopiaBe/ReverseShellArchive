@@ -28,7 +28,7 @@ Supported reverse shell commands:
 
 ## Example
 
-![Reverse Shell Archive](https://github.com/UtopiaBe/ReverseShellArchive/lib/reverseshellsarchive.gif
+![Reverse Shell Archive](https://github.com/UtopiaBe/ReverseShellArchive/lib/rsa.gif
 
 Basic reverse shell command generator:
 ```
