@@ -37,7 +37,7 @@ def main():
     parser = OptionParser()
 
     # Usage custom message.
-    parser.usage = banner() + "%prog [options]\n" \
+    parser.usage = banner() + "\nUsage: %prog [options]\n" \
                               "\nBasic usage: %prog -s [script] -o [os]\n" \
                               "\tWill create Script without given ip and port address.\n\n" \
                               "Advanced usage: %prog -s [script] -o [os] -i [ip] -p [port]\n" \
