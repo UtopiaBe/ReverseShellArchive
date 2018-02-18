@@ -21,7 +21,7 @@ Supported reverse shell commands:
     Options:
       -h, --help            show this help message and exit
       -s SCRIPT, --script=SCRIPT
-                            bash, php, perl, python, Ruby, netcat, telnet
+                            bash, php, perl, python, ruby, netcat, telnet
       -o OS, --os=OS        l/linux, w/windows
       -i HOST, --ip=HOST    Your listening ip address (optional)
       -p PORT, --port=PORT  Your listening port address (optional)

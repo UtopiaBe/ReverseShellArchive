@@ -46,11 +46,11 @@ def main():
 
     # Set the script options.
     parser.add_option("-s", "--script", type="str",
-                      help="bash, php, perl, python, Ruby, netcat, telnet",
+                      help="bash, php, perl, python, ruby, netcat, telnet",
                       dest="script")
 
-    parser.add_option("-o", "--os", type="str",
-                      help="l/linux, w/windows",
+    parser.add_option("-o", "--os", type="str", default="linux",
+                      help="l/linux (default), w/windows",
                       dest="os")
 
     parser.add_option("-i", "--ip", type="str", default=False,
