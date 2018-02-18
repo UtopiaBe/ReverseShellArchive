@@ -26,9 +26,9 @@ Supported reverse shell commands:
       -i HOST, --ip=HOST    Your listening ip address (optional)
       -p PORT, --port=PORT  Your listening port address (optional)
 
-## Example
+### Example
 
-![Reverse Shell Archive](https://github.com/UtopiaBe/ReverseShellArchive/lib/reverseshellsarchive.gif
+![Reverse Shell Archive](https://github.com/UtopiaBe/ReverseShellArchive/blob/master/lib/rsa.gif)
 
 Basic reverse shell command generator:
 ```
@@ -40,12 +40,12 @@ To generate shell command with your ip:port provided:
 $ python rsa.py -s <script> -o <os> -i <ip> -p <port>
 ```
 
-### Ideas/Coming soon
+## Ideas/Coming soon
 
 * PowerShell shell commands.
 * Local TTY shell upgrades.
 
-### License
+## License
 
 MIT License
 
